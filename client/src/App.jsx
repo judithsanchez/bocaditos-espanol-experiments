@@ -16,7 +16,7 @@ function App() {
     if (adjectives.length > 0) {
       const game = new MatchingGame(adjectives);
       setNewGame(game);
-      console.log(newGame);
+      // console.log(newGame);
     }
   }, [adjectives]);
 
@@ -32,6 +32,7 @@ function App() {
 
   return (
     <div className="gameBoard" id="gameBoard">
+      {/* <img src="./assets/faces/adorable.svg" alt="Face" /> */}
       {newGame &&
         newGame.gameBoard.map((element, index) => (
           <Card key={index} imgSrc={element.img_url} />
