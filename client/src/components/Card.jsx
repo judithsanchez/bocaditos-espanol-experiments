@@ -1,9 +1,13 @@
 import React from 'react';
 import './Card.css';
 
-function Card({ imgSrc, spanish, english }) {
+function Card({ imgSrc, spanish, english, dataIndex, id, handleCardClick }) {
   return (
-    <div className="cards">
+    <div
+      className="cards"
+      id={dataIndex}
+      onClick={() => handleCardClick(dataIndex, id)}
+    >
       <div className="back card">
         <img
           alt="Bocadito's transparent logo"
