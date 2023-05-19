@@ -1,10 +1,30 @@
 .cards {
-  border-radius: 1rem;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   height: 10rem;
   margin: 0.5rem;
   width: 10rem;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.flipped .cards {
+  transform: rotateY(180deg);
+}
+
+.flipped .back {
+  display: none;
+}
+
+.flipped .front {
+  display: flex;
+}
+
+.cards,
+.front,
+.back {
+  border-radius: 1rem;
 }
 
 .front,
@@ -16,9 +36,10 @@
 .back {
   background-color: #47d8e0;
   border-radius: 1rem;
-  /* display: flex; */
-  display: none;
+  display: flex;
+  /* display: none; */
   flex-flow: column nowrap;
+  transform: rotateY(180deg);
 }
 
 .cards-logos {
@@ -48,10 +69,11 @@
 .front {
   align-items: center;
   background-color: aquamarine;
-  /* display: none; */
-  display: flex;
+  display: none;
+  /* display: flex; */
   flex-flow: column nowrap;
   justify-content: center;
+  transform: rotateY(0);
 }
 
 .front-card-image {
