@@ -1,0 +1,57 @@
+#gameBoard {
+  background-color: antiquewhite;
+  align-items: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: auto;
+}
+
+.cards {
+  border-radius: 10px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  height: 80px;
+  margin: 5px;
+  width: 80px;
+}
+
+.front,
+.back {
+  height: 100%;
+  width: 100%;
+}
+
+.front {
+  display: none;
+}
+
+.back {
+  background-color: aquamarine;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.card-img {
+  width: 100%;
+}
+
+#gameBoard.no-click {
+  pointer-events: none;
+}
+
+@media only screen and (min-width: 768px) {
+  body {
+    align-content: center;
+    display: flex;
+    height: 100vh;
+    margin-top: 0%;
+  }
+  .cards {
+    border-radius: 10px;
+    height: 150px;
+    margin: 20px;
+    width: 150px;
+  }
+}
