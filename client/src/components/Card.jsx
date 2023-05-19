@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-function Card({ imgSrc }) {
+function Card({ imgSrc, spanish, english }) {
   return (
     <div className="cards">
       <div className="back card">
@@ -25,9 +25,9 @@ function Card({ imgSrc }) {
         <img
           className="front-card-image"
           src="/client/src/assets/faces/adorable.svg"
-          alt="Face"
+          alt={`${english}`}
         />
-        <p className="card-text">Verb</p>
+        <p className="card-text">{spanish}</p>
       </div>
     </div>
   );

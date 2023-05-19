@@ -35,7 +35,12 @@ function App() {
       {/* <img src="./assets/faces/adorable.svg" alt="Face" /> */}
       {newGame &&
         newGame.gameBoard.map((element, index) => (
-          <Card key={index} imgSrc={element.img_url} />
+          <Card
+            key={index}
+            imgSrc={element.img_url}
+            spanish={element.spanish}
+            english={element.english}
+          />
         ))}
     </div>
   );
