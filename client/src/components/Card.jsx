@@ -21,23 +21,27 @@ function Card({ imgSrc, spanish, english, dataIndex, id, handleCardClick }) {
         <img
           alt="Bocadito's transparent logo"
           className="cards-logos back-card-content let-top-corner"
-          src="/client/src/assets/logo-transparent.svg"
+          src="https://cdn.bfldr.com/Z0BJ31FP/at/p3pq5p2fnjr2z5bsswp24fx/logo-transparent.svg"
         />
         <div className="background-circle back-card-content">
-          <img className="back-card-img" src={`/${imgSrc}`} alt="Card" />
+          <img
+            className="back-card-img"
+            src="https://cdn.bfldr.com/Z0BJ31FP/at/rbsf573t5wgm4rts6jf5mhf4/hipopotamo.svg"
+            alt="Card"
+          />
         </div>
 
         <img
           alt="Bocadito's transparent logo"
           className="cards-logos right-bottom-corner back-card-content"
-          src="/client/src/assets/logo-transparent.svg"
+          src="https://cdn.bfldr.com/Z0BJ31FP/at/p3pq5p2fnjr2z5bsswp24fx/logo-transparent.svg"
         />
       </div>
 
       <div className="front card">
         <img
           className="front-card-image"
-          src="/client/src/assets/faces/adorable.svg"
+          src={`${imgSrc}`}
           alt={`${english}`}
         />
         <p className="card-text">{spanish}</p>

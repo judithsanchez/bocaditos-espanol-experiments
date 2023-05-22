@@ -14,12 +14,9 @@ router.get('/', async (_, res) => {
 router.put('/adjectives/:id', async (req, res) => {
   try {
     const id = req.params.id;
-    const { spanish, english, img_url } = req.body;
+    const { image_url } = req.body;
 
-    await db(
-      // `UPDATE adjectives SET spanish='${spanish}', english='${english}', img_url='${img_url}' WHERE id=${id};`
-      `UPDATE adjectives SET spanish=${spanish}, english=${english}, img_url=${img_url} WHERE id=${id};`
-    );
+    await db(`UPDATE adjectives SET image_url='${image_url}' WHERE id=${id};`);
 
     const updatedAdjectives = await db('SELECT * FROM adjectives;');
     res.status(200).send(updatedAdjectives);

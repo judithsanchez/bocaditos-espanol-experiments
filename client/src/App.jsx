@@ -79,11 +79,13 @@ function App() {
 
   return (
     <div className="gameBoard" id="gameBoard">
+      {/* <img src={adjectives[0].image_url} alt="Adorable" /> */}
+
       {newGame &&
         newGame.gameBoard.map((element, index) => (
           <Card
             key={index}
-            imgSrc={element.img_url}
+            imgSrc={element.image_url}
             spanish={element.spanish}
             english={element.english}
             dataIndex={element.dataindex}
