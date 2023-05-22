@@ -42,6 +42,10 @@
   transform: rotateY(180deg);
 }
 
+.back-card-content {
+  transform: rotateY(-180deg);
+}
+
 .cards-logos {
   height: 1.4rem;
   width: 1.5rem;
@@ -62,8 +66,12 @@
   width: 100%;
 }
 
-.right-bottom-corner {
+.let-top-corner {
   align-self: flex-end;
+}
+
+.right-bottom-corner {
+  align-self: flex-start;
 }
 
 .front {

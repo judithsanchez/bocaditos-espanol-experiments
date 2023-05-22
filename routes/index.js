@@ -11,4 +11,21 @@ router.get('/', async (_, res) => {
   }
 });
 
+router.put('/adjectives/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
+    const { spanish, english, img_url } = req.body;
+
+    await db(
+      // `UPDATE adjectives SET spanish='${spanish}', english='${english}', img_url='${img_url}' WHERE id=${id};`
+      `UPDATE adjectives SET spanish=${spanish}, english=${english}, img_url=${img_url} WHERE id=${id};`
+    );
+
+    const updatedAdjectives = await db('SELECT * FROM adjectives;');
+    res.status(200).send(updatedAdjectives);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 module.exports = router;
