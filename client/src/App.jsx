@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { MatchingGame } from './components/matchingGame';
+import { Animals } from './components/animals';
 import Card from './components/Card';
 
 import './App.css';
 
 function App() {
   const [adjectives, setAdjectives] = useState([]);
+  const [animals, setAnimals] = useState(Animals); // Initialize with the array of animals
   const [newGame, setNewGame] = useState(null);
 
   useEffect(() => {
