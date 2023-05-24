@@ -79,8 +79,6 @@ function App() {
 
   return (
     <div className="gameBoard" id="gameBoard">
-      {/* <img src={adjectives[0].image_url} alt="Adorable" /> */}
-
       {newGame &&
         newGame.gameBoard.map((element, index) => (
           <Card
