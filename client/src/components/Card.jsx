@@ -1,8 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Card.css';
+import { Animals } from './animals';
 
 function Card({ imgSrc, spanish, english, dataIndex, id, handleCardClick }) {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [backImageUrl, setBackImageUrl] = useState('');
+  const [animals, setAnimals] = useState(Animals);
+
+  useEffect(() => {
+    const randomIndex = Math.floor(Math.random() * animals.length);
+    const randomAnimal = animals[randomIndex];
+    setBackImageUrl(randomAnimal.image_url);
+  }, [animals]);
 
   const handleCardFlip = () => {
     setIsFlipped(!isFlipped);
@@ -24,11 +33,7 @@ function Card({ imgSrc, spanish, english, dataIndex, id, handleCardClick }) {
           src="https://cdn.bfldr.com/Z0BJ31FP/at/s3s8fsg57rph3r6hv62h5h/logo-transparent.svg"
         />
         <div className="background-circle back-card-content">
-          <img
-            className="back-card-img"
-            src="https://cdn.bfldr.com/Z0BJ31FP/at/rbsf573t5wgm4rts6jf5mhf4/hipopotamo.svg"
-            alt="Card"
-          />
+          <img className="back-card-img" src={backImageUrl} alt="Card" />
         </div>
 
         <img
@@ -39,11 +44,7 @@ function Card({ imgSrc, spanish, english, dataIndex, id, handleCardClick }) {
       </div>
 
       <div className="front card">
-        <img
-          className="front-card-image"
-          src={`${imgSrc}`}
-          alt={`${english}`}
-        />
+        <img className="front-card-image" src={imgSrc} alt={english} />
         <p className="card-text">{spanish}</p>
       </div>
     </div>
