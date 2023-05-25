@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './Card.jsx';
 import './MatchingGame.css';
 
@@ -24,15 +24,22 @@ const MatchingGame = ({ list }) => {
   const [attempts, setAttempts] = useState(0);
   const [gameStatus, setGameStatus] = useState('in progress');
 
-  const handleCardClick = (index) => {
-    const updatedGameBoard = [...gameBoard];
-    const clickedCard = updatedGameBoard[index];
+  useEffect(() => {
+    if (foundMatches === gameBoard.length / 2) {
+      setGameStatus('won');
+    }
+  }, [foundMatches, gameBoard]);
 
-    if (clickedCard.matched) {
+  const handleCardClick = (index) => {
+    const flippedCard = gameBoard[index];
+
+    if (flippedCard.matched || flippedCard.isFlipped) {
       return;
     }
 
-    clickedCard.isFlipped = true;
+    const updatedGameBoard = gameBoard.map((card, i) =>
+      i === index ? { ...card, isFlipped: true } : card
+    );
 
     const flippedCards = updatedGameBoard.filter(
       (card) => card.isFlipped && !card.matched
@@ -49,12 +56,11 @@ const MatchingGame = ({ list }) => {
     const [firstCard, secondCard] = flippedCards;
 
     if (firstCard.id === secondCard.id) {
-      const updatedGameBoard = gameBoard.map((card) => {
-        if (card.id === firstCard.id) {
-          return { ...card, matched: true };
-        }
-        return card;
-      });
+      const updatedGameBoard = gameBoard.map((card) =>
+        card.id === firstCard.id
+          ? { ...card, matched: true, isFlipped: true }
+          : card
+      );
 
       setGameBoard(updatedGameBoard);
       setFoundMatches(foundMatches + 1);
@@ -63,12 +69,9 @@ const MatchingGame = ({ list }) => {
         setGameStatus('won');
       }
     } else {
-      const updatedGameBoard = gameBoard.map((card) => {
-        if (card.isFlipped && !card.matched) {
-          return { ...card, isFlipped: false };
-        }
-        return card;
-      });
+      const updatedGameBoard = gameBoard.map((card) =>
+        card.isFlipped && !card.matched ? { ...card, isFlipped: false } : card
+      );
 
       setGameBoard(updatedGameBoard);
     }
@@ -86,6 +89,8 @@ const MatchingGame = ({ list }) => {
           english={element.english}
           dataIndex={index}
           id={element.id}
+          isFlipped={element.isFlipped}
+          matched={element.matched}
           handleCardClick={handleCardClick}
         />
       ))}

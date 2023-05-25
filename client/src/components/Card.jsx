@@ -1,23 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './Card.css';
 import CardFront from './CardFront';
 import CardBack from './CardBack';
 
-function Card({ imgSrc, spanish, english, dataIndex, id, handleCardClick }) {
-  const [isFlipped, setIsFlipped] = useState(false);
-
+function Card({
+  imgSrc,
+  spanish,
+  english,
+  dataIndex,
+  id,
+  isFlipped,
+  matched,
+  handleCardClick,
+}) {
   const handleCardFlip = () => {
-    setIsFlipped(!isFlipped);
+    if (!matched) {
+      handleCardClick(dataIndex);
+    }
   };
 
   return (
     <div
       className={`cards ${isFlipped ? 'flipped' : ''}`}
       id={dataIndex}
-      onClick={() => {
-        handleCardClick(dataIndex, id);
-        handleCardFlip();
-      }}
+      onClick={handleCardFlip}
     >
       {isFlipped ? (
         <CardFront imgSrc={imgSrc} spanish={spanish} />
