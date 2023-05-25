@@ -21,15 +21,7 @@
 .back {
   background-color: #47d8e0;
   display: flex;
-  flex-direction: column nowrap;
-  transform: rotateY(180deg);
-}
-
-.back-card-content {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  transform: rotateY(-180deg);
+  flex-flow: column nowrap;
 }
 
 .cards-logos {
@@ -38,10 +30,12 @@
 
 .background-circle {
   align-self: center;
+  align-items: center;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   display: flex;
   height: 7.5rem;
+  justify-content: center;
   width: 7.5rem;
 }
 
@@ -51,11 +45,12 @@
 }
 
 .let-top-corner {
-  align-self: flex-end;
+  padding: 0.25rem 0 0 0.25rem;
 }
 
 .right-bottom-corner {
-  align-self: flex-start;
+  align-self: flex-end;
+  padding: 0 0.25rem 0.25rem 0;
 }
 
 .front {

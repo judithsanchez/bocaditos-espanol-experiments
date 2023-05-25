@@ -25,11 +25,7 @@ function Card({
       id={dataIndex}
       onClick={handleCardFlip}
     >
-      {isFlipped ? (
-        <CardFront imgSrc={imgSrc} spanish={spanish} />
-      ) : (
-        <CardBack />
-      )}
+      {isFlipped ? <CardFront imgSrc={imgSrc} text={spanish} /> : <CardBack />}
     </div>
   );
 }
