@@ -1,16 +1,8 @@
 import React, { useState } from 'react';
+import Card from './Card.jsx';
+import './MatchingGame.css';
 
 const MatchingGame = ({ list }) => {
-  const [firstCard, setFirstCard] = useState(undefined);
-  const [secondCard, setSecondCard] = useState(undefined);
-  const [foundMatches, setFoundMatches] = useState(0);
-  const [attempts, setAttempts] = useState(0);
-  const [foundElements, setFoundElements] = useState([]);
-  const [gameStatus, setGameStatus] = useState('in progress');
-  const [gameBoard, setGameBoard] = useState(() =>
-    shuffleElements(duplicateElements(list))
-  );
-
   const duplicateElements = (list) => {
     return [...list, ...list];
   };
@@ -25,52 +17,74 @@ const MatchingGame = ({ list }) => {
     return list;
   };
 
-  const getCardInfo = (element) => {
-    if (!firstCard && !secondCard) {
-      setFirstCard(element);
+  const [gameBoard, setGameBoard] = useState(() =>
+    shuffleElements(duplicateElements(list))
+  );
+  const [foundMatches, setFoundMatches] = useState(0);
+  const [attempts, setAttempts] = useState(0);
+  const [gameStatus, setGameStatus] = useState('in progress');
+
+  const handleCardClick = (index) => {
+    const updatedGameBoard = [...gameBoard];
+    const clickedCard = updatedGameBoard[index];
+
+    if (clickedCard.matched) {
       return;
     }
 
-    if (firstCard && !secondCard) {
-      setSecondCard(element);
+    clickedCard.isFlipped = true;
+
+    const flippedCards = updatedGameBoard.filter(
+      (card) => card.isFlipped && !card.matched
+    );
+
+    if (flippedCards.length === 2) {
+      setTimeout(() => checkMatch(flippedCards), 1000);
     }
+
+    setGameBoard(updatedGameBoard);
   };
 
-  const checkMatch = (firstElement, secondElement) => {
-    if (firstElement === null || secondElement === null) {
-      return;
-    }
+  const checkMatch = (flippedCards) => {
+    const [firstCard, secondCard] = flippedCards;
 
-    setAttempts(attempts + 1);
+    if (firstCard.id === secondCard.id) {
+      const updatedGameBoard = gameBoard.map((card) => {
+        if (card.id === firstCard.id) {
+          return { ...card, matched: true };
+        }
+        return card;
+      });
 
-    if (firstElement === secondElement) {
-      setFoundElements([...foundElements, firstElement]);
+      setGameBoard(updatedGameBoard);
       setFoundMatches(foundMatches + 1);
 
       if (foundMatches + 1 >= gameBoard.length / 2) {
         setGameStatus('won');
       }
+    } else {
+      const updatedGameBoard = gameBoard.map((card) => {
+        if (card.isFlipped && !card.matched) {
+          return { ...card, isFlipped: false };
+        }
+        return card;
+      });
 
-      setFirstCard(null);
-      setSecondCard(null);
-      return true;
+      setGameBoard(updatedGameBoard);
     }
 
-    setFirstCard(null);
-    setSecondCard(null);
-    return false;
+    setAttempts(attempts + 1);
   };
 
   return (
-    <div>
-      {/* Render your game board and handle the game logic */}
+    <div className="gameBoard" id="gameBoard">
       {gameBoard.map((element, index) => (
         <Card
           key={index}
           imgSrc={element.image_url}
           spanish={element.spanish}
           english={element.english}
-          dataIndex={`data${index}`}
+          dataIndex={index}
           id={element.id}
           handleCardClick={handleCardClick}
         />
