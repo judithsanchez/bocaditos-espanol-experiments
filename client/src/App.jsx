@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import MatchingGame from './components/MatchingGame.jsx';
+import GameBoard from './components/GameBoard.jsx';
 import './App.css';
+import MatchingGame from './matchingGame.js';
 
 function App() {
   const [adjectives, setAdjectives] = useState([]);
+  const newGame = new MatchingGame(adjectives);
 
   useEffect(() => {
     fetchData();
@@ -19,9 +21,7 @@ function App() {
     }
   };
 
-  return (
-    <div>{adjectives.length > 0 && <MatchingGame list={adjectives} />}</div>
-  );
+  return <div>{newGame && <GameBoard game={newGame} />}</div>;
 }
 
 export default App;
