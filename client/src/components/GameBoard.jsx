@@ -10,18 +10,37 @@ const GameBoard = ({ game }) => {
   });
 
   const handleCardClickCallback = (index) => {
-    if (!cardsClicked.first) {
+    if (cardsClicked.first === null) {
       setCardsClicked((prevState) => ({
         ...prevState,
         first: index,
       }));
-    } else {
+    } else if (cardsClicked.second === null) {
       setCardsClicked((prevState) => ({
         ...prevState,
         second: index,
       }));
     }
   };
+
+  useEffect(() => {
+    if (cardsClicked.first !== null && cardsClicked.second !== null) {
+      const first = game.board[cardsClicked.first].image_url;
+      const second = game.board[cardsClicked.second].image_url;
+
+      if (game.checkMatch(first, second)) {
+        console.log('match');
+      } else {
+        console.log('not a match');
+        setTimeout(() => {
+          setCardsClicked({
+            first: null,
+            second: null,
+          });
+        }, 1500);
+      }
+    }
+  }, [cardsClicked]);
 
   useEffect(() => {
     const getText = (list) => {

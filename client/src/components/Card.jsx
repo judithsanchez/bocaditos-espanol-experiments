@@ -6,10 +6,6 @@ import CardBack from './CardBack';
 function Card({ imgSrc, text, handleCardClickCallback }) {
   const [isCardFlipped, setCardFlipped] = useState(false);
 
-  // const handleCardClick = () => {
-  //   isCardFlipped ? setCardFlipped(false) : setCardFlipped(true);
-  // };
-
   const handleCardClick = () => {
     if (isCardFlipped) {
       setCardFlipped(false);
