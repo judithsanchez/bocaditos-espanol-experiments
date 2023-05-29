@@ -3,11 +3,20 @@ import './Card.css';
 import CardFront from './CardFront';
 import CardBack from './CardBack';
 
-function Card({ imgSrc, text }) {
+function Card({ imgSrc, text, handleCardClickCallback }) {
   const [isCardFlipped, setCardFlipped] = useState(false);
 
+  // const handleCardClick = () => {
+  //   isCardFlipped ? setCardFlipped(false) : setCardFlipped(true);
+  // };
+
   const handleCardClick = () => {
-    setCardFlipped(true);
+    if (isCardFlipped) {
+      setCardFlipped(false);
+    } else {
+      setCardFlipped(true);
+      handleCardClickCallback();
+    }
   };
 
   return (
