@@ -30,7 +30,6 @@ const GameBoard = ({ game }) => {
 
   return (
     <div className="gameBoard" id="gameBoard">
-      {console.log(game.board)}
       {game.board.map((element, index) => (
         <Card
           key={index}
