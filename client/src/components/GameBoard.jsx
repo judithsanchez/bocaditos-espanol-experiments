@@ -8,7 +8,7 @@ const GameBoard = ({ game }) => {
     first: null,
     second: null,
   });
-  const [isMatch, setIsMatch] = useState(null); // Test
+  const [isMatch, setIsMatch] = useState(null);
 
   const handleCardClickCallback = (index) => {
     if (cardsClicked.first === null) {
@@ -40,10 +40,10 @@ const GameBoard = ({ game }) => {
 
       if (!game.checkMatch(first, second)) {
         console.log('not a match');
-        setIsMatch('not a match'); // Test
+        setIsMatch('not a match');
       } else {
         console.log('match');
-        setIsMatch('match'); // Test
+        setIsMatch('match');
       }
 
       setTimeout(() => {
@@ -54,21 +54,17 @@ const GameBoard = ({ game }) => {
 
   useEffect(() => {
     const getText = (list) => {
-      const newText = [];
-      for (let i = 0; i < list.length; i += 1) {
-        let isDuplicate = false;
-        for (let j = 0; j < i; j += 1) {
-          if (list[i].id === list[j].id) {
-            isDuplicate = true;
-            break;
-          }
+      const newText = list.map((element) => element.spanish);
+      const english = list.map((element) => element.english);
+
+      newText.forEach((word, index) => {
+        const occurrences = newText.filter((w, i) => w === word);
+        if (occurrences.length > 1) {
+          const englishEquivalent = english[index];
+          newText[index] = englishEquivalent;
         }
-        if (isDuplicate) {
-          newText.push(list[i].english);
-        } else {
-          newText.push(list[i].spanish);
-        }
-      }
+      });
+
       setText(newText);
     };
 
@@ -85,7 +81,7 @@ const GameBoard = ({ game }) => {
           text={text[index]}
           board={game.board}
           handleCardClickCallback={() => handleCardClickCallback(index)}
-          isMatch={isMatch} // Test
+          isMatch={isMatch}
         />
       ))}
     </div>
