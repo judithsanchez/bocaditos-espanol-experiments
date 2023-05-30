@@ -5,6 +5,7 @@ import CardBack from './CardBack';
 // Test: added isMatch prop
 function Card({ imgSrc, text, handleCardClickCallback, isMatch }) {
   const [isCardFlipped, setCardFlipped] = useState(false);
+  const [matchedFound, setMatchedFound] = useState(false);
 
   const handleCardClick = () => {
     if (isCardFlipped) {
@@ -15,17 +16,21 @@ function Card({ imgSrc, text, handleCardClickCallback, isMatch }) {
     }
   };
 
-  // useEffect(() => {
-  //   if (isCardFlipped === true && isMatch === 'not a match') {
-  //     setCardFlipped(false);
-  //   }
-  // }, [isMatch]); // Test
-
   useEffect(() => {
-    if (isCardFlipped && isMatch === 'not a match') {
-      setTimeout(() => {
-        setCardFlipped(false);
-      }, 2000); // Test
+    if (matchedFound === true) {
+      // Test
+      return;
+    }
+
+    if (isCardFlipped) {
+      if (isMatch === 'not a match') {
+        setTimeout(() => {
+          setCardFlipped(false);
+        }, 2000); // Test
+      } else if (isMatch === 'match') {
+        // Test
+        setMatchedFound(true);
+      }
     }
   }, [isCardFlipped, isMatch]); // Test
 
