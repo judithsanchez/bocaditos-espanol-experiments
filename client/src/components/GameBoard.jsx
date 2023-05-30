@@ -8,6 +8,7 @@ const GameBoard = ({ game }) => {
     first: null,
     second: null,
   });
+  const [isMatch, setIsMatch] = useState(null); // Test
 
   const handleCardClickCallback = (index) => {
     if (cardsClicked.first === null) {
@@ -23,22 +24,31 @@ const GameBoard = ({ game }) => {
     }
   };
 
+  const resetCardsClicked = () => {
+    setCardsClicked({
+      first: null,
+      second: null,
+    });
+
+    setIsMatch(null);
+  };
+
   useEffect(() => {
     if (cardsClicked.first !== null && cardsClicked.second !== null) {
       const first = game.board[cardsClicked.first].image_url;
       const second = game.board[cardsClicked.second].image_url;
 
-      if (game.checkMatch(first, second)) {
-        console.log('match');
-      } else {
+      if (!game.checkMatch(first, second)) {
         console.log('not a match');
-        setTimeout(() => {
-          setCardsClicked({
-            first: null,
-            second: null,
-          });
-        }, 1500);
+        setIsMatch('not a match'); // Test
+      } else {
+        console.log('match');
+        setIsMatch('match'); // Test
       }
+
+      setTimeout(() => {
+        resetCardsClicked();
+      }, 1500);
     }
   }, [cardsClicked]);
 
@@ -67,6 +77,7 @@ const GameBoard = ({ game }) => {
 
   return (
     <div className="gameBoard" id="gameBoard">
+      {console.log(game.board)}
       {game.board.map((element, index) => (
         <Card
           key={index}
@@ -74,6 +85,7 @@ const GameBoard = ({ game }) => {
           text={text[index]}
           board={game.board}
           handleCardClickCallback={() => handleCardClickCallback(index)}
+          isMatch={isMatch} // Test
         />
       ))}
     </div>
