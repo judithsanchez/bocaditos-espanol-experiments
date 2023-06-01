@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import GameBoard from './components/GameBoard.jsx';
 import './App.css';
 import MatchingGame from './matchingGame.js';
+import NoResponsive from './components/NoResponsive.jsx';
 
 function App() {
   const [adjectives, setAdjectives] = useState([]);
@@ -21,7 +22,12 @@ function App() {
     }
   };
 
-  return <div>{newGame && <GameBoard game={newGame} />}</div>;
+  return (
+    <div className="app">
+      {/* <NoResponsive /> */}
+      {newGame && <GameBoard game={newGame} />}
+    </div>
+  );
 }
 
 export default App;

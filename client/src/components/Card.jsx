@@ -2,9 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './Card.css';
 import CardFront from './CardFront';
 import CardBack from './CardBack';
+
+// Data
+import { Animals } from './animals';
+
 function Card({ imgSrc, text, handleCardClickCallback, isMatch }) {
   const [isCardFlipped, setCardFlipped] = useState(false);
   const [matchedFound, setMatchedFound] = useState(false);
+  const [backImageUrl, setBackImageUrl] = useState(
+    Animals[Math.floor(Math.random() * Animals.length)].image_url
+  );
 
   const handleCardClick = () => {
     setCardFlipped(true);
@@ -29,7 +36,11 @@ function Card({ imgSrc, text, handleCardClickCallback, isMatch }) {
 
   return (
     <div className="cards" onClick={handleCardClick}>
-      {isCardFlipped ? <CardFront text={text} imgSrc={imgSrc} /> : <CardBack />}
+      {isCardFlipped ? (
+        <CardFront text={text} imgSrc={imgSrc} />
+      ) : (
+        <CardBack backImageUrl={backImageUrl} />
+      )}
     </div>
   );
 }

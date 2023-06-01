@@ -1,15 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { Animals } from './animals';
+import React from 'react';
 
-function CardBack() {
-  const [backImageUrl, setBackImageUrl] = useState('');
-
-  useEffect(() => {
-    const randomIndex = Math.floor(Math.random() * Animals.length);
-    const randomAnimal = Animals[randomIndex];
-    setBackImageUrl(randomAnimal.image_url);
-  }, []);
-
+function CardBack({ backImageUrl }) {
   return (
     <div className="back card">
       <img
