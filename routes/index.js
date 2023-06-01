@@ -11,6 +11,21 @@ router.get('/', async (_, res) => {
   }
 });
 
+router.post('/adjectives', async (req, res) => {
+  try {
+    const { spanish, english, image_url } = req.body;
+
+    await db(
+      `INSERT INTO adjectives (spanish, english, image_url) VALUES ('${spanish}', '${english}', '${image_url}');`
+    );
+
+    const updatedAdjectives = await db('SELECT * FROM adjectives;');
+    res.status(200).send(updatedAdjectives);
+  } catch (error) {
+    res.status(500).send(error);
+  }
+});
+
 router.put('/adjectives/:id', async (req, res) => {
   try {
     const id = req.params.id;
