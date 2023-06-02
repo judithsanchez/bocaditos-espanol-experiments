@@ -69,10 +69,10 @@ const GameBoard = ({ game }) => {
 
       setText(newText);
 
-      if (matches === 1) {
+      if (matches === game.board.length / 2) {
         setTimeout(() => {
           setIsWon(true);
-        }, 1500);
+        }, 2500);
       }
     };
 
