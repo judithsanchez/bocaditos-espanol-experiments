@@ -8,7 +8,7 @@ Learning is easier when playing, so I created a memory game using React.js.
 
 ### 🟡 Version 1
 
-This version only contains the basic logic of a memory matching game using React. But what's cool is that it serves as a practice tool for Spanish/English. Each pair shares the same image, but one card has the text in Spanish and the other in English.
+This version contains the basic logic of a memory matching game using React. But what's cool is that it serves as a practice tool for Spanish/English. Each pair shares the same image, but one card has the text in Spanish and the other in English.
 
 - **🌱 Next version:** Include a wild card that will reveal a match.
 - **👾 Bugs:** None that I know of, but if you find one let me know!
