@@ -1,96 +1,89 @@
-# Full Stack Development Test - Week Five
+# Matching Game Implementation
 
-This assessment tests your understanding of building a full stack app using React, Node/Express, and MySQL.
+[🔗 Preview](https://docs.google.com/presentation/d/1qYHBjNm1W0jiaMoG0BPtyceUYQOpb1Dpbd5T36nJ0jo/edit?usp=sharing)
 
-## Setup
+Learning is easier when playing, so I created a memory game using React.js.
 
-### Dependencies
+**🔍 Keywords:** React.js, Express, Mysql, Node.js, JavaScript, CSS3, HTML5, async/await, API, Git, responsive design.
 
-- Run `npm install` in project directory. This will install server-related dependencies such as `express`.
-- `cd client` and run `npm install`. This will install client dependencies (React).
+### 🟡 Version 1
 
-### Database Prep
+This version only contains the basic logic of a memory matching game using React. But what's cool is that it serves as a practice tool for Spanish/English. Each pair shares the same image, but one card has the text in Spanish and the other in English.
 
-- Access the MySQL interface in your terminal by running
-- Create a new database called facebook: `create database facebook`
-- Add a `.env` file to the project folder of this repository containing the MySQL authentication information for MySQL user. For example:
+- **🌱 Next version:** Include a wild card that will reveal a match.
+- **👾 Bugs:** None that I know of, but if you find one let me know!
 
-```bash
-  DB_HOST=localhost
-  DB_USER=root
-  DB_NAME=facebook
-  DB_PASS=YOURPASSWORD
-```
+### 📦 Dependencies
 
-- Run `npm run migrate` in the project folder of this repository, in a new terminal window. This will create a table called 'students' in your database.
+1. Run `npm install` in project directory. This will install server-related dependencies such as `express`.
 
-- Make sure you understand how the `students` table is constructed. In your MySQL console, you can run `use facebook;` and then `describe students;` to see the structure of the students table.
+2. `cd client` and run `npm install`. This will install client dependencies (React).
 
-### Development
+### 💾 Database Setup
 
-- Run `npm start` in project directory to start the Express server on port 4000
-- In another terminal, do `cd client` and run `npm run dev` to start the client in development mode with hot reloading in port 5173.
+To set up the MySQL database for the project, follow these steps:
 
-## Basic Requirements
+1. Access the MySQL interface in your terminal by running the appropriate command.
+2. Create a new database called "adjectives" by executing the following command: `create database adjectives`.
+3. Create an `.env` file in the project folder and add the MySQL authentication information for the MySQL user. For example:
 
-Create a webpage with the following functionality:
+   ```
+   DB_HOST=localhost
+   DB_USER=root
+   DB_NAME=adjectives
+   DB_PASS=YOURPASSWORD
 
-- [ ] A list of students.
-- [ ] A form to add new students. There should be fields to input the first and last names, separately.
-  - After submitting the form, the new student should be added to the database and displayed on the page.
-- [ ] Each student can be deleted with a delete button. After clicking on this button, student should be deleted from the database and the updated list of students shown on the page
-- [ ] Style the app to make it look as polished as possible. Bootstrap is already loaded in the index.html file, so you can use it if you want to.
-- [ ] (Optional/bonus) Clicking on a student should show the student's profile to the right of the students list. The info to display this profile should be obtained from a fetch request to `/students/:id`
+   ```
 
-To accomplish this, you will need to:
+4. Run `npm run migrate` in a new terminal window in the project folder. This command will create a table called 'adjectives' in the database.
+5. The database has already been populated with the information of adjectives.
 
-- [ ] Finish the routes in the API server (`/routes/students.js`).
-- [ ] Finish the front end (`/client/src/`). Create as many components as you need.
+| Tables_in_adjectives |
+| -------------------- |
+| adjectives           |
 
-## Guidelines
+| Field     | Type         | Null | Key | Default | Extra          |
+| --------- | ------------ | ---- | --- | ------- | -------------- |
+| id        | int          | NO   | PRI | NULL    | auto_increment |
+| spanish   | varchar(40)  | NO   |     | NULL    |                |
+| english   | varchar(40)  | NO   |     | NULL    |                |
+| image_url | varchar(255) | YES  |     | NULL    |                |
 
-- Do not use any presentations from the class or any notes you have taken.
-- Try to do the test **without looking at code you have previously written**. If you get stuck for more than 30min, you may look at your previous code - but make sure you let your instructor know.
-- The only resources you may use online are:
-  - [MDN docs](https://developer.mozilla.org/en-US/)
-  - [Express docs](https://expressjs.com/en/api.html)
-  - [MySQL docs](https://dev.mysql.com/doc/refman/8.0/en/database-use.html)
-  - [React docs](https://reactjs.org/docs/hello-world.html)
-- Make sure you give yourself a grade before turning it in!
+### 🔧 Development
 
-## Tips
+1. Run `npm start` in project directory to start the Express server on port 4000
+2. In another terminal, do `cd client` and run `npm run dev` to start the client in development mode with hot reloading in port 5173.
 
-Suggested Process:
+### 🗂️ File structure:
 
-1. Try and write the correct query in `mysql`.
-1. Use that query to finish the endpoints in `/routes/students.js`.
-1. Test your endpoints using Postman.
-1. Call the endpoints from the front end.
-
-## Self-Assessment
-
-Give yourself a grade for each question. Explain why you gave yourself that grade.
-
-| Grade | Explanation                                                        |
-| :---: | ------------------------------------------------------------------ |
-|   4   | I understood this completely and did not struggle answering it.    |
-|   3   | I think I did well, but I didn't totally understand why it worked. |
-|   2   | I think I was close, but I didn't get the answer.                  |
-|   1   | I am struggling with this question.                                |
-|   0   | I did not attempt this question (explain why)                      |
-
-### 1. API Endpoints & MySQL
-
-- Grade: 4
-- Explanation: I was able to complete this part without many problems. I used Postman and was able to confirm that is was working well.
-
-### 2. Frontend
-
-- Grade: 3
-- Explanation: Even though the app seems to be working fine there are a couple of bugs that I haven't been able to resolve.
-
-                1. When adding a new student I can't make the component to re-render individually that is way I am refreshing the whole page when submitting the form. That is the only way I found to display the new student information. But it is correctly added to the database, it is a problem on the frontend.
-
-                2. When you select a student to display its information and you delete it the app crashes.
-
-                3. I am not using the get by id endopoint we created to show the information about the student. I didn't have time to do it.
+    📗 MATCHING GAME
+    ├── 📂 bin
+    ├── 📂 client
+    │   ├── 📂 node_modules
+    │   ├── 📂 public
+    │   ├── 📂 src
+    │   │   ├── 📂 assets
+    │   │   ├── 📂 components
+    |   │   │   ├── 💛 animals.js
+    |   │   │   ├── 🎨 Card.css
+    |   │   │   ├── 💙 Card.jsx
+    |   │   │   ├── 💙 CardBack.jsx
+    |   │   │   ├── 💙 CardFront.jsx
+    |   │   │   ├── 🎨 GameBoard.css
+    |   │   │   ├── 💙 GameBoard.jsx
+    |   │   │   ├── 🎨 GameFinished.css
+    |   │   │   └── 💙 GameFinished.jsx
+    │   │   ├── 🎨 App.css
+    │   │   ├── 💙 App.jsx
+    │   │   ├── 🎨 index.css
+    │   │   ├── 💙 main.jsx
+    │   │   └── 💛 matchingGame.js
+    │   ├── 📄 index.html
+    ├── 📂 model
+    ├── 📂 node_modules
+    ├── 📂 public
+    ├── 📂 routes
+    ├── ⚙️ .env
+    ├── 💛️ app.js
+    ├── 🔑 LICENSE
+    └── 📖 README.md
