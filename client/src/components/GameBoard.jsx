@@ -12,8 +12,11 @@ const GameBoard = ({ game }) => {
   const [isMatch, setIsMatch] = useState(null);
   const [matches, setMatches] = useState(null);
   const [isWon, setIsWon] = useState(false);
+  const [disableClicks, setDisableClicks] = useState(false); // New state variable
 
   const handleCardClickCallback = (index) => {
+    if (disableClicks) return; // Return early if clicks are disabled
+
     if (cardsClicked.first === null) {
       setCardsClicked((prevState) => ({
         ...prevState,
@@ -34,6 +37,7 @@ const GameBoard = ({ game }) => {
     });
 
     setIsMatch(null);
+    setDisableClicks(false); // Re-enable clicks after resetting
   };
 
   const checkMatch = (firstImageUrl, secondImageUrl) => {
@@ -67,6 +71,8 @@ const GameBoard = ({ game }) => {
 
       checkMatch(firstImageUrl, secondImageUrl);
 
+      setDisableClicks(true); // Disable clicks during the delay
+
       setTimeout(() => {
         resetCardsClicked();
       }, 1500);
@@ -81,12 +87,12 @@ const GameBoard = ({ game }) => {
     if (matches === game.board.length / 2 && isMatch === 'match') {
       setTimeout(() => {
         setIsWon(true);
-      }, 2500);
+      }, 2000);
     }
   }, [matches, isMatch]);
 
   return (
-    <div>
+    <>
       {isWon ? (
         <GameFinished />
       ) : (
@@ -99,11 +105,12 @@ const GameBoard = ({ game }) => {
               board={game.board}
               handleCardClickCallback={() => handleCardClickCallback(index)}
               isMatch={isMatch}
+              disableClicks={disableClicks} // Pass the disableClicks state as a prop
             />
           ))}
         </div>
       )}
-    </div>
+    </>
   );
 };
 
