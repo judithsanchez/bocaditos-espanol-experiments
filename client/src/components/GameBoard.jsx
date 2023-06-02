@@ -36,17 +36,36 @@ const GameBoard = ({ game }) => {
     setIsMatch(null);
   };
 
+  const checkMatch = (firstImageUrl, secondImageUrl) => {
+    if (!game.checkMatch(firstImageUrl, secondImageUrl)) {
+      setIsMatch('not a match');
+    } else {
+      setIsMatch('match');
+      setMatches(game.matches.length);
+    }
+  };
+
+  const processText = (list) => {
+    const newText = list.map((element) => element.spanish);
+    const english = list.map((element) => element.english);
+
+    newText.forEach((word, index) => {
+      const occurrences = newText.filter((w, i) => w === word);
+      if (occurrences.length > 1) {
+        const englishEquivalent = english[index];
+        newText[index] = englishEquivalent;
+      }
+    });
+
+    setText(newText);
+  };
+
   useEffect(() => {
     if (cardsClicked.first !== null && cardsClicked.second !== null) {
-      const first = game.board[cardsClicked.first].image_url;
-      const second = game.board[cardsClicked.second].image_url;
+      const firstImageUrl = game.board[cardsClicked.first].image_url;
+      const secondImageUrl = game.board[cardsClicked.second].image_url;
 
-      if (!game.checkMatch(first, second)) {
-        setIsMatch('not a match');
-      } else {
-        setIsMatch('match');
-        setMatches(game.matches.length);
-      }
+      checkMatch(firstImageUrl, secondImageUrl);
 
       setTimeout(() => {
         resetCardsClicked();
@@ -55,32 +74,19 @@ const GameBoard = ({ game }) => {
   }, [cardsClicked]);
 
   useEffect(() => {
-    const getText = (list) => {
-      const newText = list.map((element) => element.spanish);
-      const english = list.map((element) => element.english);
+    processText(game.board);
+  }, [game.board]);
 
-      newText.forEach((word, index) => {
-        const occurrences = newText.filter((w, i) => w === word);
-        if (occurrences.length > 1) {
-          const englishEquivalent = english[index];
-          newText[index] = englishEquivalent;
-        }
-      });
-
-      setText(newText);
-
-      if (matches === game.board.length / 2) {
-        setTimeout(() => {
-          setIsWon(true);
-        }, 2500);
-      }
-    };
-
-    getText(game.board);
-  }, [game.board, matches]);
+  useEffect(() => {
+    if (matches === game.board.length / 2 && isMatch === 'match') {
+      setTimeout(() => {
+        setIsWon(true);
+      }, 2500);
+    }
+  }, [matches, isMatch]);
 
   return (
-    <>
+    <div>
       {isWon ? (
         <GameFinished />
       ) : (
@@ -97,7 +103,7 @@ const GameBoard = ({ game }) => {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
