@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import GameBoard from './components/GameBoard.jsx';
-import GameFinished from './components/GameFinished.jsx';
 
 import './App.css';
 import MatchingGame from './matchingGame.js';

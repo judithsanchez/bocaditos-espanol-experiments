@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card.jsx';
 import './GameBoard.css';
-import GameFinished from './GameFinished.jsx'; // Test
+import GameFinished from './GameFinished.jsx';
 
 const GameBoard = ({ game }) => {
   const [text, setText] = useState([]);
@@ -10,7 +10,8 @@ const GameBoard = ({ game }) => {
     second: null,
   });
   const [isMatch, setIsMatch] = useState(null);
-  const [matches, setMatches] = useState(null); // Test
+  const [matches, setMatches] = useState(null);
+  const [isWon, setIsWon] = useState(false);
 
   const handleCardClickCallback = (index) => {
     if (cardsClicked.first === null) {
@@ -44,7 +45,7 @@ const GameBoard = ({ game }) => {
         setIsMatch('not a match');
       } else {
         setIsMatch('match');
-        setMatches(game.matches.length); // Test
+        setMatches(game.matches.length);
       }
 
       setTimeout(() => {
@@ -67,14 +68,20 @@ const GameBoard = ({ game }) => {
       });
 
       setText(newText);
+
+      if (matches === 1) {
+        setTimeout(() => {
+          setIsWon(true);
+        }, 1500);
+      }
     };
 
     getText(game.board);
-  }, [game.board]);
+  }, [game.board, matches]);
 
   return (
     <>
-      {matches === 3 ? (
+      {isWon ? (
         <GameFinished />
       ) : (
         <div className="gameBoard" id="gameBoard">
