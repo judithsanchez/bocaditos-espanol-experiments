@@ -1,33 +1,7 @@
-// import React, { useState, useEffect } from 'react';
-// import GameBoard from './components/GameBoard.jsx';
-// import './App.css';
-// import MatchingGame from './matchingGame.js';
-
-// function App() {
-//   const [adjectives, setAdjectives] = useState([]);
-//   const newGame = new MatchingGame(adjectives);
-
-//   useEffect(() => {
-//     fetchData();
-//   }, []);
-
-//   const fetchData = async () => {
-//     try {
-//       const response = await fetch('/api');
-//       const data = await response.json();
-//       setAdjectives(data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
-
-//   return <div className="app">{newGame && <GameBoard game={newGame} />}</div>;
-// }
-
-// export default App;
-
 import React, { useState, useEffect } from 'react';
 import GameBoard from './components/GameBoard.jsx';
+import GameFinished from './components/GameFinished.jsx';
+
 import './App.css';
 import MatchingGame from './matchingGame.js';
 
@@ -43,7 +17,7 @@ function App() {
     if (adjectives.length > 0) {
       const shuffledAdjectives = shuffleArray(adjectives);
       // Here you can set the limit on how many objects will be taking into consideration to create the game board
-      setRandomAdjectives(shuffledAdjectives.slice(0, 6));
+      setRandomAdjectives(shuffledAdjectives.slice(0, 7));
     }
   }, [adjectives]);
 

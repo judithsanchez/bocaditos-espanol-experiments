@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card.jsx';
 import './GameBoard.css';
+import GameFinished from './GameFinished.jsx'; // Test
 
 const GameBoard = ({ game }) => {
   const [text, setText] = useState([]);
@@ -9,6 +10,7 @@ const GameBoard = ({ game }) => {
     second: null,
   });
   const [isMatch, setIsMatch] = useState(null);
+  const [matches, setMatches] = useState(null); // Test
 
   const handleCardClickCallback = (index) => {
     if (cardsClicked.first === null) {
@@ -39,11 +41,10 @@ const GameBoard = ({ game }) => {
       const second = game.board[cardsClicked.second].image_url;
 
       if (!game.checkMatch(first, second)) {
-        console.log('not a match');
         setIsMatch('not a match');
       } else {
-        console.log('match');
         setIsMatch('match');
+        setMatches(game.matches.length); // Test
       }
 
       setTimeout(() => {
@@ -72,18 +73,24 @@ const GameBoard = ({ game }) => {
   }, [game.board]);
 
   return (
-    <div className="gameBoard" id="gameBoard">
-      {game.board.map((element, index) => (
-        <Card
-          key={index}
-          imgSrc={element.image_url}
-          text={text[index]}
-          board={game.board}
-          handleCardClickCallback={() => handleCardClickCallback(index)}
-          isMatch={isMatch}
-        />
-      ))}
-    </div>
+    <>
+      {matches === 3 ? (
+        <GameFinished />
+      ) : (
+        <div className="gameBoard" id="gameBoard">
+          {game.board.map((element, index) => (
+            <Card
+              key={index}
+              imgSrc={element.image_url}
+              text={text[index]}
+              board={game.board}
+              handleCardClickCallback={() => handleCardClickCallback(index)}
+              isMatch={isMatch}
+            />
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 
