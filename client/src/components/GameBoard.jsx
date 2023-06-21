@@ -4,6 +4,9 @@ import './GameBoard.css';
 import GameFinished from './GameFinished.jsx';
 
 const GameBoard = ({ game }) => {
+  // Test
+  const [fakeCardClicked, setFakeCardClicked] = useState(null);
+  //////////////////////////////////////
   const [text, setText] = useState([]);
   const [cardsClicked, setCardsClicked] = useState({
     first: null,
@@ -12,11 +15,10 @@ const GameBoard = ({ game }) => {
   const [isMatch, setIsMatch] = useState(null);
   const [matches, setMatches] = useState(null);
   const [isWon, setIsWon] = useState(false);
-  const [disableClicks, setDisableClicks] = useState(false); // New state variable
+  const [disableClicks, setDisableClicks] = useState(false);
 
   const handleCardClickCallback = (index) => {
-    if (disableClicks) return; // Return early if clicks are disabled
-
+    if (disableClicks) return;
     if (cardsClicked.first === null) {
       setCardsClicked((prevState) => ({
         ...prevState,
@@ -37,7 +39,7 @@ const GameBoard = ({ game }) => {
     });
 
     setIsMatch(null);
-    setDisableClicks(false); // Re-enable clicks after resetting
+    setDisableClicks(false);
   };
 
   const checkMatch = (firstImageUrl, secondImageUrl) => {
@@ -71,8 +73,7 @@ const GameBoard = ({ game }) => {
 
       checkMatch(firstImageUrl, secondImageUrl);
 
-      setDisableClicks(true); // Disable clicks during the delay
-
+      setDisableClicks(true);
       setTimeout(() => {
         resetCardsClicked();
       }, 1500);
@@ -91,21 +92,37 @@ const GameBoard = ({ game }) => {
     }
   }, [matches, isMatch]);
 
+  // Test
+  const fakeCardClick = (key) => {
+    setFakeCardClicked(key);
+  };
+
+  //////////////////////////////////////
+
   return (
     <>
+      {/* Test */}
+      <button onClick={() => fakeCardClick(6)}>Fake card click</button>
+      {
+        /////////////////////////
+      }
       {isWon ? (
         <GameFinished />
       ) : (
         <div className="gameBoard" id="gameBoard">
           {game.board.map((element, index) => (
             <Card
+              // Test
+              fakeCardClicked={fakeCardClicked}
+              cardKey={index}
+              ////////////////////////////////////////////////////////////////
               key={index}
               imgSrc={element.image_url}
               text={text[index]}
               board={game.board}
               handleCardClickCallback={() => handleCardClickCallback(index)}
               isMatch={isMatch}
-              disableClicks={disableClicks} // Pass the disableClicks state as a prop
+              disableClicks={disableClicks}
             />
           ))}
         </div>

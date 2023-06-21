@@ -7,24 +7,37 @@ import CardBack from './CardBack';
 import { Animals } from './animals';
 
 function Card({
+  // Test
+  fakeCardClicked,
+  cardKey,
+  ////////////////////////////////////////////////////////////////
   imgSrc,
   text,
   handleCardClickCallback,
   isMatch,
   disableClicks,
 }) {
+  // Test
   const [isCardFlipped, setCardFlipped] = useState(false);
   const [matchedFound, setMatchedFound] = useState(false);
   const [backImageUrl, setBackImageUrl] = useState(
     Animals[Math.floor(Math.random() * Animals.length)].image_url
   );
+  ////////////////////////////////////////////////////////////////
 
   const handleCardClick = () => {
-    if (disableClicks) return; // Return early if clicks are disabled
-
+    if (disableClicks) return;
     setCardFlipped(true);
     handleCardClickCallback();
   };
+
+  // Test
+  useEffect(() => {
+    if (fakeCardClicked === cardKey) {
+      setCardFlipped(true);
+    }
+  });
+  ////////////////////////////////////////////////////////////////
 
   useEffect(() => {
     if (matchedFound === true) {
