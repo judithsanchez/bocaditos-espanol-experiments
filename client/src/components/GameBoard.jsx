@@ -102,7 +102,7 @@ const GameBoard = ({ game }) => {
   return (
     <>
       {/* Test */}
-      <button onClick={() => fakeCardClick(6)}>Fake card click</button>
+      {/* <button onClick={() => fakeCardClick(0)}>Fake card click</button> */}
       {
         /////////////////////////
       }

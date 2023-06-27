@@ -1,6 +1,8 @@
 # Matching Game Implementation
 
-[🔗 Preview](https://docs.google.com/presentation/d/1qYHBjNm1W0jiaMoG0BPtyceUYQOpb1Dpbd5T36nJ0jo/edit?usp=sharing)
+[🎥 Preview](https://judithsanchez.github.io/matching-game/)
+
+[🔗 Presentation](https://docs.google.com/presentation/d/1qYHBjNm1W0jiaMoG0BPtyceUYQOpb1Dpbd5T36nJ0jo/edit?usp=sharing)
 
 Learning is easier when playing, so I created a memory game using React.js.
 

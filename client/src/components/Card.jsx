@@ -17,13 +17,11 @@ function Card({
   isMatch,
   disableClicks,
 }) {
-  // Test
   const [isCardFlipped, setCardFlipped] = useState(false);
   const [matchedFound, setMatchedFound] = useState(false);
   const [backImageUrl, setBackImageUrl] = useState(
     Animals[Math.floor(Math.random() * Animals.length)].image_url
   );
-  ////////////////////////////////////////////////////////////////
 
   const handleCardClick = () => {
     if (disableClicks) return;
